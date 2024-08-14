@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.Design;
-
 namespace MaxCoRetailManager.Application;
 
 public static class ApplicationServicesRegistration

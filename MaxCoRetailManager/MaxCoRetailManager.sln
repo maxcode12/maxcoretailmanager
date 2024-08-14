@@ -5,13 +5,15 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{939B934F-0ED9-468C-8224-0C9B7BF8D5B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Core", "MaxCoRetailManager.Library\MaxCoRetailManager.Core.csproj", "{DE4E3E80-841B-4678-8E14-1B0543EB6025}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxCoRetailManager.Core", "MaxCoRetailManager.Library\MaxCoRetailManager.Core.csproj", "{DE4E3E80-841B-4678-8E14-1B0543EB6025}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Application", "MaxCoRetailManager.Application\MaxCoRetailManager.Application.csproj", "{2836F9E3-9EED-483B-B700-260A561247EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxCoRetailManager.Application", "MaxCoRetailManager.Application\MaxCoRetailManager.Application.csproj", "{2836F9E3-9EED-483B-B700-260A561247EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Infrastructure", "MaxCoRetailManager.Infrastructure\MaxCoRetailManager.Infrastructure.csproj", "{77D6581A-048B-444F-BB55-7B73C20306CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxCoRetailManager.Infrastructure", "MaxCoRetailManager.Infrastructure\MaxCoRetailManager.Infrastructure.csproj", "{77D6581A-048B-444F-BB55-7B73C20306CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.API", "MaxCoRetailManager.API\MaxCoRetailManager.API.csproj", "{C4A73387-2161-445C-BF53-8D691E61F66E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxCoRetailManager.API", "MaxCoRetailManager.API\MaxCoRetailManager.API.csproj", "{C4A73387-2161-445C-BF53-8D691E61F66E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Identity", "MaxCoRetailManager.Identity\MaxCoRetailManager.Identity.csproj", "{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{C4A73387-2161-445C-BF53-8D691E61F66E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A73387-2161-445C-BF53-8D691E61F66E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A73387-2161-445C-BF53-8D691E61F66E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{2836F9E3-9EED-483B-B700-260A561247EE} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 		{77D6581A-048B-444F-BB55-7B73C20306CC} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 		{C4A73387-2161-445C-BF53-8D691E61F66E} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
+		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28082BA2-94E6-40EC-9C1C-B66BE69CB411}

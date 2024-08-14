@@ -14,4 +14,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MaxCoRetailManager.Application\MaxCoRetailManager.Application.csproj" />
+    <ProjectReference Include="..\MaxCoRetailManager.Infrastructure\MaxCoRetailManager.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
