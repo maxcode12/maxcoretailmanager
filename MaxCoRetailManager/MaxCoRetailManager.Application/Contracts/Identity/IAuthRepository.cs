@@ -1,4 +1,4 @@
-﻿using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
+﻿using MaxCoRetailManager.Application.Features.Users.Queries;
 using MaxCoRetailManager.Application.Responses;
 using MaxCoRetailManager.Core.Entities;
 

@@ -2,7 +2,7 @@
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace MaxCoRetailManager.Application.Features.Users.Requests.Queries;
+namespace MaxCoRetailManager.Application.Features.Users.Queries;
 
 public class GetUserRequest : IRequest<AuthResponse>
 {

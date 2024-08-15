@@ -1,5 +1,5 @@
 ﻿using MaxCoRetailManager.Application.DTOs.UserDTO;
-using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
+using MaxCoRetailManager.Application.Features.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

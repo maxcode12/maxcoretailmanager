@@ -2,7 +2,7 @@
 using MaxCoRetailManager.Application.Responses;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Users.Requests.Commands;
+namespace MaxCoRetailManager.Application.Features.Users.Commands;
 
 public class CreateUserCommand : IRequest<BaseResponse>
 {

@@ -1,9 +1,8 @@
 ﻿using MaxCoRetailManager.Application.Contracts.Identity;
-using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
 using MaxCoRetailManager.Application.Responses;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Users.Handlers.QueryHandlers;
+namespace MaxCoRetailManager.Application.Features.Users.Queries;
 
 public class GetUserRequestHandler : IRequestHandler<GetUserRequest, AuthResponse>
 {

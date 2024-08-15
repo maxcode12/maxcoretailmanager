@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Identity;
 using MaxCoRetailManager.Application.DTOs.UserDTO;
-using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Users.Handlers.QueryHandlers;
+namespace MaxCoRetailManager.Application.Features.Users.Queries;
 
 public class GetUserRequestListHandler : IRequestHandler<GetUserRequestList, IReadOnlyList<UserGetDto>>
 {

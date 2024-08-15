@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Identity;
-using MaxCoRetailManager.Application.Features.Users.Requests.Commands;
 using MaxCoRetailManager.Application.Responses;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Users.Handlers.CommandHandlers;
+namespace MaxCoRetailManager.Application.Features.Users.Commands;
 
 public class CreateUserHandler : IRequestHandler<CreateUserCommand, BaseResponse>
 {
