@@ -11,30 +11,28 @@ public class RoleSeed : IEntityTypeConfiguration<IdentityRole>
         builder.HasData(
             new IdentityRole
             {
-                Id = "1",
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            },
-            new IdentityRole
-            {
-                Id = "2",
+                Id = "8b693986-0d12-487f-9fde-e0e983e2f51c",
                 Name = "User",
                 NormalizedName = "USER"
             },
             new IdentityRole
             {
-                Id = "3",
-                Name = "Manager",
-                NormalizedName = "MANAGER"
+                Id = "c619043f-2923-4180-95fc-1104ed3ddc3e",
+                Name = "Admin",
+                NormalizedName = "ADMIN"
             },
-            new IdentityRole
-            {
-                Id = "4",
-                Name = "Cashier",
-                NormalizedName = "CASHIER"
-            }
-
-
+             new IdentityRole
+             {
+                 Id = "c619453f-2973-4180-78fc-1b84ed3dkc3o",
+                 Name = "Manager",
+                 NormalizedName = "MANAGER"
+             },
+              new IdentityRole
+              {
+                  Id = "d6s9043f-3924-4589-05fq-1i94ed3ddc3f",
+                  Name = "Cashier",
+                  NormalizedName = "CASHIER"
+              }
             );
     }
 }
