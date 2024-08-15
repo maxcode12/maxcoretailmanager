@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxCoRetailManager.API", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Identity", "MaxCoRetailManager.Identity\MaxCoRetailManager.Identity.csproj", "{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxCoRetailManager.Persistence", "MaxCoRetailManager.Persistence\MaxCoRetailManager.Persistence.csproj", "{972375DB-2B4F-4C40-A4C5-9A69BE80DB56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{972375DB-2B4F-4C40-A4C5-9A69BE80DB56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{972375DB-2B4F-4C40-A4C5-9A69BE80DB56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{972375DB-2B4F-4C40-A4C5-9A69BE80DB56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{972375DB-2B4F-4C40-A4C5-9A69BE80DB56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +57,7 @@ Global
 		{77D6581A-048B-444F-BB55-7B73C20306CC} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 		{C4A73387-2161-445C-BF53-8D691E61F66E} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 		{C4F6578F-B9BE-4A53-A3AE-38D3A1D16CBA} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
+		{972375DB-2B4F-4C40-A4C5-9A69BE80DB56} = {939B934F-0ED9-468C-8224-0C9B7BF8D5B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28082BA2-94E6-40EC-9C1C-B66BE69CB411}

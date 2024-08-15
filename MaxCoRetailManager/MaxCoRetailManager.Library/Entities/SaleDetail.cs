@@ -13,6 +13,6 @@ public class SaleDetail : Base
     public DateTime SaleDate { get; set; }
     public Sale Sale { get; set; }
     public Product Product { get; set; }
-    public ICollection<Sale> Sales { get; set; }
+
 
 }

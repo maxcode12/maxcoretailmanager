@@ -1,5 +1,6 @@
 using MaxCoRetailManager.Application;
 using MaxCoRetailManager.Identity;
+using MaxCoRetailManager.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddIdentityRegisterService(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigurePersistenceService(builder.Configuration);
 
 
 builder.Services.AddCors(options =>

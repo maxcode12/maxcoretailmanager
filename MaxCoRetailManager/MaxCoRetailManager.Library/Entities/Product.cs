@@ -14,4 +14,7 @@ public class Product : Base
     public int CategoryId { get; set; }
     public Category Category { get; set; }
 
+    public ICollection<Inventory> Inventories { get; set; }
+
+
 }

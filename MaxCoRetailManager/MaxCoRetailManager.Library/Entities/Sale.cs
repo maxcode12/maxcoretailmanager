@@ -13,5 +13,8 @@ public class Sale : Base
     public DateTime SaleDate { get; set; } = DateTime.UtcNow;
 
     public Product Product { get; set; }
-    public AppUser Cashier { get; set; }
+    public User Cashier { get; set; }
+    public ICollection<SaleDetail> SaleDetails { get; set; }
+
+
 }

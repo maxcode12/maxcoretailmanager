@@ -9,4 +9,5 @@ public class Inventory : Base
     public int Quantity { get; set; }
     public DateTime PurchaseDate { get; set; } = DateTime.UtcNow;
     public Product Product { get; set; }
+
 }
