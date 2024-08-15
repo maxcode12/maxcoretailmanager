@@ -1,4 +1,4 @@
-﻿namespace MaxCoRetailManager.Core.Common;
+﻿namespace MaxCoRetailManager.Application.Responses;
 
 public class BaseResponse
 {

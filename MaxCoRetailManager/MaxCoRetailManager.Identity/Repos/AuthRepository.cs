@@ -1,6 +1,8 @@
-﻿using MaxCoRetailManager.Application.Settings;
+﻿using MaxCoRetailManager.Application.Contracts.Identity;
+using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
+using MaxCoRetailManager.Application.Responses;
+using MaxCoRetailManager.Application.Settings;
 using MaxCoRetailManager.Core.Entities;
-using MaxCoRetailManager.Core.IRepos.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -26,23 +28,54 @@ public class AuthRepository : IAuthRepository
         _jwtSettings = jwtSettings;
 
     }
-    public async Task<User> Login(string username, string password)
+    public async Task<AuthResponse> Login(GetUserRequest request)
     {
-        return null;
+        var response = new AuthResponse();
+        var username = await _userManager.FindByNameAsync(request.Email);
+        if (username == null)
+        {
+            return new AuthResponse { IsSuccess = false, Message = "Invalid Email Address" };
+        }
+
+        var result = await _signInManager.CheckPasswordSignInAsync(username, request.Password, false);
+        if (result.Succeeded)
+        {
+            var token = await GenerateToken(Task.FromResult(username));
+
+            return new AuthResponse
+            {
+                IsSuccess = true,
+                AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
+                Message = "Login Successful",
+
+            };
+        }
+        return response;
     }
 
 
 
-    public Task<bool> Register(User user, string password)
+    public async Task<bool> Register(User user, string password)
     {
-        throw new NotImplementedException();
+        var response = new AuthResponse();
+        var userExists = await UserExists(user.UserName);
+        var createUser = await _userManager.CreateAsync(user, password);
+        if (createUser.Succeeded)
+        {
+            await _userManager.AddToRoleAsync(user, "Admin");
+            response.IsSuccess = true;
+            response.Message = "User Created Successfully!";
+
+            return response.IsSuccess = true;
+        }
+        return response.IsSuccess = false;
     }
 
     public Task<bool> UserExists(string username)
     {
         var usernameExists = _userManager.FindByNameAsync(username);
-        var userEmailExists = _userManager.FindByEmailAsync(username);
-        if (usernameExists == null && userEmailExists == null)
+
+        if (usernameExists == null)
         {
             return Task.FromResult(false);
         }

@@ -1,4 +1,4 @@
-﻿using MaxCoRetailManager.Core.IRepos.Identity;
+﻿using MaxCoRetailManager.Application.Contracts.Identity;
 
 namespace MaxCoRetailManager.Identity.Repos;
 
