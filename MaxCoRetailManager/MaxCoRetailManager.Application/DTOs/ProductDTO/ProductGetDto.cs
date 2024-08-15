@@ -1,5 +1,4 @@
 ﻿using MaxCoRetailManager.Application.DTOs.Common;
-using MaxCoRetailManager.Core.Enums;
 
 namespace MaxCoRetailManager.Application.DTOs.ProductDTO
 {
@@ -10,6 +9,6 @@ namespace MaxCoRetailManager.Application.DTOs.ProductDTO
         public DateTime UpdatedAt { get; set; }
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public Category Category { get; set; }
+        public int Categoryid { get; set; }
     }
 }

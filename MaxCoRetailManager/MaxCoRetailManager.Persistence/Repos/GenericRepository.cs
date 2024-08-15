@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MaxCoRetailManager.Persistence.Repos;
 
-public class GenericRepostory<T> : IGenericRepository<T> where T : class
+public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
     private readonly MaxCoRetailDbContext _context;
 
-    public GenericRepostory(MaxCoRetailDbContext context)
+    public GenericRepository(MaxCoRetailDbContext context)
     {
         _context = context;
 

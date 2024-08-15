@@ -1,6 +1,6 @@
 ﻿namespace MaxCoRetailManager.Application.Specs;
 
-public class CatelogSpecParams
+public class CatalogSpecParams
 {
     private const int MaxPageSize = 100;
     public int PageIndex { get; set; } = 1;
