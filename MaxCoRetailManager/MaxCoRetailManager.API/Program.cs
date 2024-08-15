@@ -1,3 +1,4 @@
+using MaxCoRetailManager.Application;
 using MaxCoRetailManager.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddIdentityRegisterService(builder.Configuration);
-//builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureApplicationServices();
 
 
 var app = builder.Build();

@@ -6,6 +6,6 @@ namespace MaxCoRetailManager.Application.Contracts.Identity;
 public interface IAuthRepository
 {
     Task<bool> UserExists(string username);
-    Task<bool> Register(User user, string password);
+    Task Register(User user, string password);
     Task<AuthResponse> Login(GetUserRequest query);
 }

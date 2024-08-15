@@ -46,6 +46,10 @@ public class AuthRepository : IAuthRepository
             {
                 IsSuccess = true,
                 AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
+                RefreshToken = new JwtSecurityTokenHandler().WriteToken(token),
+                UserName = username.UserName,
+                Email = username.Email,
+                Id = username.Id,
                 Message = "Login Successful",
 
             };
@@ -55,20 +59,22 @@ public class AuthRepository : IAuthRepository
 
 
 
-    public async Task<bool> Register(User user, string password)
+    public async Task Register(User user, string password)
     {
-        var response = new AuthResponse();
-        var userExists = await UserExists(user.UserName);
+
         var createUser = await _userManager.CreateAsync(user, password);
         if (createUser.Succeeded)
         {
+            var token = await _userManager.GetAuthenticatorKeyAsync(user);
+            user.EmailConfirmed = true;
+            user.LockoutEnabled = false;
+            user.TwoFactorEnabled = false;
+            user.PhoneNumberConfirmed = false;
+            var succeeded = _userManager.VerifyTwoFactorTokenAsync(user, _userManager.Options.Tokens.AuthenticatorTokenProvider, token);
             await _userManager.AddToRoleAsync(user, "Admin");
-            response.IsSuccess = true;
-            response.Message = "User Created Successfully!";
 
-            return response.IsSuccess = true;
         }
-        return response.IsSuccess = false;
+
     }
 
     public Task<bool> UserExists(string username)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MaxCoRetailManager.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityMigrations : Migration
+    public partial class CreatedNewMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
