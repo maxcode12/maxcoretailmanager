@@ -3,6 +3,6 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Users.Requests.Queries;
 
-public class GetUserRequestList : IRequest<List<UserGetDto>>
+public class GetUserRequestList : IRequest<IReadOnlyList<UserGetDto>>
 {
 }

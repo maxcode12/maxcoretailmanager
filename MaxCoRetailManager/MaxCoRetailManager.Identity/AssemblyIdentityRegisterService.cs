@@ -32,8 +32,10 @@ public static class AssemblyIdentityRegisterService
 
 
 
-        services.AddScoped<IUserRepository, UserRepository>();
+
+
         services.AddScoped<IAuthRepository, AuthRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<UserManager<User>, UserManager<User>>();
 
         services.AddAuthentication(

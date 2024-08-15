@@ -12,8 +12,15 @@ public static class ApplicationServicesRegistration
         //MediatR
         services.AddMediatR(op =>
         {
-            op.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+            op.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+            //op.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
+
         });
+
+
+
+
+
 
         return services;
     }
