@@ -18,6 +18,19 @@ builder.Services.AddIdentityRegisterService(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyCorsPolicy",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
