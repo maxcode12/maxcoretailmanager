@@ -13,8 +13,12 @@ public class MaxCoRetailIdentityDbContext : IdentityDbContext<User>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
+        builder.ApplyConfigurationsFromAssembly(typeof(MaxCoRetailIdentityDbContext).Assembly);
         base.OnModelCreating(builder);
+        //configuring the assembly
+
     }
+
 
     public DbSet<User> Users { get; set; }
 
