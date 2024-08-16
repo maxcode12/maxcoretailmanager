@@ -63,4 +63,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return new Pagination<T>(catalogSpecParams.PageIndex, catalogSpecParams.PageSize, count, data);
 
     }
+
+    public async Task<T> GetAsync(DateTime date)
+    {
+        return await _context.Set<T>().FindAsync(date);
+    }
 }
