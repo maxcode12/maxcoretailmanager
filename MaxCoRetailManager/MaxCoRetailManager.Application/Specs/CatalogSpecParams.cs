@@ -10,8 +10,8 @@ public class CatalogSpecParams
         get => _pageSize;
         set => _pageSize = (value > MaxPageSize) ? MaxPageSize : value;
     }
-    public string Sort { get; set; }
-    private string _search;
+    public string Sort { get; set; } = string.Empty;
+    private string _search = "";
     public string Search
     {
         get => _search;

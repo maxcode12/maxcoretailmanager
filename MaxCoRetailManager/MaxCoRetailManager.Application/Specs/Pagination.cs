@@ -16,10 +16,7 @@ public class Pagination<T> where T : class
         Count = count;
         Data = data;
     }
-    public Pagination()
-    {
 
-    }
     public static Pagination<T> ToPagedList(IReadOnlyList<T> source, int pageIndex, int pageSize, int count)
     {
         return new Pagination<T>(pageIndex, pageSize, count, source);

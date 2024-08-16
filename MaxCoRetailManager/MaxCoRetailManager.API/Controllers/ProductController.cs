@@ -1,6 +1,6 @@
 ﻿using MaxCoRetailManager.Application.DTOs.ProductDTO;
-using MaxCoRetailManager.Application.Features.Products.Commands;
 using MaxCoRetailManager.Application.Features.Products.Queries;
+using MaxCoRetailManager.Application.Features.Products.Requests;
 using MaxCoRetailManager.Application.Specs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -20,6 +20,4 @@ public class MaxCoRetailIdentityDbContext : IdentityDbContext<User>
     }
 
 
-    public DbSet<User> Users { get; set; }
-
 }

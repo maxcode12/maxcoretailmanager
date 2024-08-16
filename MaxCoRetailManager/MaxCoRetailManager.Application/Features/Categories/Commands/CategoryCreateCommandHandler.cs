@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.DTOs.CategoryDTO;
+using MaxCoRetailManager.Application.Features.Categories.Requests;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 

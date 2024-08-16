@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
+using MaxCoRetailManager.Application.Features.Products.Requests;
 using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Products.Queries;

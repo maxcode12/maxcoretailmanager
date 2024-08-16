@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Inventories\" />
+    <Folder Include="Features\SaleDetails\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

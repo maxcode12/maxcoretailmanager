@@ -1,6 +1,6 @@
 ﻿using MaxCoRetailManager.Application.DTOs.CategoryDTO;
-using MaxCoRetailManager.Application.Features.Categories.Commands;
 using MaxCoRetailManager.Application.Features.Categories.Queries;
+using MaxCoRetailManager.Application.Features.Categories.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

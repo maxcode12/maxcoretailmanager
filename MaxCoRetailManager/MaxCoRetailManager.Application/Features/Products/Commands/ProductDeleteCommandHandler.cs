@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
+using MaxCoRetailManager.Application.Features.Products.Requests;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
+using MaxCoRetailManager.Application.Features.Products.Requests;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 
@@ -27,8 +28,8 @@ public class ProductCommandHandler : IRequestHandler<ProductCommandRequest, Prod
 
         var product = _mapper.Map<Product>(request.ProductCreateDto);
         await _productRepository.AddAsync(product);
-
-        return _mapper.Map<ProductCreateDto>(product);
+        var productMapped = _mapper.Map<ProductCreateDto>(product);
+        return productMapped;
 
     }
 }

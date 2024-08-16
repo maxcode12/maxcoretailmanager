@@ -1,7 +1,7 @@
 ﻿using MaxCoRetailManager.Application.DTOs.CategoryDTO;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Categories.Commands;
+namespace MaxCoRetailManager.Application.Features.Categories.Requests;
 
 public class CategoryCreateCommandRequest : IRequest<CategoryCreateDto>
 {
