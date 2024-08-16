@@ -1,22 +1,22 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
-using MaxCoRetailManager.Application.Features.Products.Requests;
+using MaxCoRetailManager.Application.Features.Products.Requests.Queries;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Queries;
+namespace MaxCoRetailManager.Application.Features.Products.Handler;
 
-public class GetProductsListHandler : IRequestHandler<GetProductsListRequest, IReadOnlyList<ProductGetDto>>
+public class GetProductsListHandler : IRequestHandler<GetProductsListQuery, IReadOnlyList<ProductGetDto>>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
     public GetProductsListHandler(IProductRepository productRepository, IMapper mapper)
     {
-        this._productRepository = productRepository;
-        this._mapper = mapper;
+        _productRepository = productRepository;
+        _mapper = mapper;
     }
-    public async Task<IReadOnlyList<ProductGetDto>> Handle(GetProductsListRequest request, CancellationToken cancellationToken)
+    public async Task<IReadOnlyList<ProductGetDto>> Handle(GetProductsListQuery request, CancellationToken cancellationToken)
     {
         var allProducts = await _productRepository.GetAllAsync();
         var productsMapper = _mapper.Map<IReadOnlyList<ProductGetDto>>(allProducts);

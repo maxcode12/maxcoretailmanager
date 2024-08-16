@@ -1,9 +1,9 @@
 ﻿using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Requests;
+namespace MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 
-public class ProductCommandRequest : IRequest<ProductCreateDto>
+public class ProductCommand : IRequest<ProductCreateDto>
 {
     public ProductCreateDto ProductCreateDto { get; set; } = new();
 }

@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
-using MaxCoRetailManager.Application.Features.Products.Requests;
+using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Commands;
+namespace MaxCoRetailManager.Application.Features.Products.Handler;
 
-public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommandRequest, ProductUpdateDto>
+public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommand, ProductUpdateDto>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ public class ProductUpdateCommandHandler : IRequestHandler<ProductUpdateCommandR
         _productRepository = productRepository;
         _mapper = mapper;
     }
-    public async Task<ProductUpdateDto> Handle(ProductUpdateCommandRequest request, CancellationToken cancellationToken)
+    public async Task<ProductUpdateDto> Handle(ProductUpdateCommand request, CancellationToken cancellationToken)
     {
         //var validator = new ProductUpdateValidator(_productRepository);
         //var validationResult = validator.Validate(request.ProductUpdateDto);

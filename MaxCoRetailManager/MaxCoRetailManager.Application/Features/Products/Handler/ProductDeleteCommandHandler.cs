@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
-using MaxCoRetailManager.Application.Features.Products.Requests;
+using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Commands
+namespace MaxCoRetailManager.Application.Features.Products.Handler
 {
-    internal class ProductDeleteCommandHandler : IRequestHandler<ProductDeleteCommandRequest, Unit>
+    internal class ProductDeleteCommandHandler : IRequestHandler<ProductDeleteCommand, Unit>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ namespace MaxCoRetailManager.Application.Features.Products.Commands
         }
 
 
-        async Task<Unit> IRequestHandler<ProductDeleteCommandRequest, Unit>.Handle(ProductDeleteCommandRequest request, CancellationToken cancellationToken)
+        async Task<Unit> IRequestHandler<ProductDeleteCommand, Unit>.Handle(ProductDeleteCommand request, CancellationToken cancellationToken)
         {
             //var validator = new ProductDeleteValidator(_productRepository);
             //var validationResult = validator.Validate(request.ProductDeleteDto);

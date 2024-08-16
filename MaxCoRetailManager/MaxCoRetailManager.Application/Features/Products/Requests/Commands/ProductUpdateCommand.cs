@@ -1,9 +1,9 @@
 ﻿using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Requests;
+namespace MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 
-public class ProductUpdateCommandRequest : IRequest<ProductUpdateDto>
+public class ProductUpdateCommand : IRequest<ProductUpdateDto>
 {
     public ProductUpdateDto ProductUpdateDto { get; set; } = new();
 }

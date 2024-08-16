@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
-using MaxCoRetailManager.Application.Features.Products.Requests;
+using MaxCoRetailManager.Application.Features.Products.Requests.Queries;
 using MediatR;
 
-namespace MaxCoRetailManager.Application.Features.Products.Queries;
+namespace MaxCoRetailManager.Application.Features.Products.Handler;
 
-public class GetProductRequestByIdHandler : IRequestHandler<GetProductRequestById, ProductGetDto>
+public class GetProductRequestByIdHandler : IRequestHandler<GetProductByIdQuery, ProductGetDto>
 {
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
@@ -16,7 +16,7 @@ public class GetProductRequestByIdHandler : IRequestHandler<GetProductRequestByI
         _mapper = mapper;
         _productRepository = productRepository;
     }
-    public async Task<ProductGetDto> Handle(GetProductRequestById request, CancellationToken cancellationToken)
+    public async Task<ProductGetDto> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
         var product = await _productRepository.GetAsync(request.Id);
 

@@ -1,6 +1,6 @@
 ﻿using MaxCoRetailManager.Application.DTOs.ProductDTO;
-using MaxCoRetailManager.Application.Features.Products.Queries;
-using MaxCoRetailManager.Application.Features.Products.Requests;
+using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
+using MaxCoRetailManager.Application.Features.Products.Requests.Queries;
 using MaxCoRetailManager.Application.Specs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +28,7 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new ProductCommandRequest { ProductCreateDto = productCreateDto });
+            var response = await _mediator.Send(new ProductCommand { ProductCreateDto = productCreateDto });
             return Ok(response);
         }
         catch (Exception ex)
@@ -46,7 +46,7 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new ProductUpdateCommandRequest { ProductUpdateDto = productUpdateDto });
+            var response = await _mediator.Send(new ProductUpdateCommand { ProductUpdateDto = productUpdateDto });
             return Ok(response);
         }
         catch (Exception ex)
@@ -64,7 +64,7 @@ public class ProductController : ControllerBase
     {
         try
         {
-            await _mediator.Send(new ProductDeleteCommandRequest { ProductDeleteDto = productDeleteDto });
+            await _mediator.Send(new ProductDeleteCommand { ProductDeleteDto = productDeleteDto });
             return Ok();
         }
         catch (Exception ex)
@@ -78,7 +78,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
     public async Task<IActionResult> GetById(int id)
     {
-        var response = await _mediator.Send(new GetProductRequestById { Id = id });
+        var response = await _mediator.Send(new GetProductByIdQuery { Id = id });
         return Ok(response);
     }
 
@@ -86,7 +86,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
     public async Task<IActionResult> GetAll()
     {
-        var response = await _mediator.Send(new GetProductsListRequest());
+        var response = await _mediator.Send(new GetProductsListQuery());
         return Ok(response);
     }
 
@@ -94,7 +94,7 @@ public class ProductController : ControllerBase
     [ProducesResponseType(typeof(Pagination<ProductGetDto>), 200)]
     public async Task<IActionResult> GetAllPagination([FromQuery] CatalogSpecParams productSpecParams)
     {
-        var response = await _mediator.Send(new GetProductByPaginationRequest { CatalogSpecParams = productSpecParams });
+        var response = await _mediator.Send(new GetProductByPaginationQuery { CatalogSpecParams = productSpecParams });
         return Ok(response);
     }
 }
