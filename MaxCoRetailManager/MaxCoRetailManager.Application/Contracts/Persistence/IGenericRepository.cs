@@ -1,8 +1,11 @@
-﻿namespace MaxCoRetailManager.Application.Contracts.Persistence;
+﻿using MaxCoRetailManager.Application.Specs;
+
+namespace MaxCoRetailManager.Application.Contracts.Persistence;
 
 public interface IGenericRepository<T> where T : class
 {
     Task<T> GetAsync(int id);
+    Task<T> GetAsync(string id);
     Task<IReadOnlyList<T>> GetAllAsync();
     Task<IReadOnlyList<T>> GetAllPaginationAsync(int pageIndex, int pageSize,
         int count, IReadOnlyList<T> entity);
@@ -10,6 +13,6 @@ public interface IGenericRepository<T> where T : class
     Task UpdateAsync(T entity);
     Task DeleteAsync(T entity);
     Task<bool> IsExist(int id);
-
+    Task<Pagination<T>> GetAllPagination(CatalogSpecParams catalogSpecParams);
 }
 

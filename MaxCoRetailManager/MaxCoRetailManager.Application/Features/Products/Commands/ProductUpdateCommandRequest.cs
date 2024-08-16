@@ -5,5 +5,5 @@ namespace MaxCoRetailManager.Application.Features.Products.Commands;
 
 public class ProductUpdateCommandRequest : IRequest<ProductUpdateDto>
 {
-    public ProductUpdateDto ProductUpdateDto { get; set; }
+    public ProductUpdateDto ProductUpdateDto { get; set; } = new();
 }

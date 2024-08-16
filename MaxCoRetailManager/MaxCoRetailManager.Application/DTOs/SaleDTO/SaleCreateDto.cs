@@ -8,7 +8,7 @@ public class SaleCreateDto : Base
     public int Quantity { get; set; }
     public decimal TotalPrice { get; set; }
     public DateTime SaleDate { get; set; }
-    public string SaleBy { get; set; }
+    public string SaleBy { get; set; } = string.Empty;
 
 
 }

@@ -2,6 +2,7 @@
 using MaxCoRetailManager.Application.DTOs.CategoryDTO;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MaxCoRetailManager.Application.DTOs.UserDTO;
+using MaxCoRetailManager.Application.Specs;
 using MaxCoRetailManager.Core.Entities;
 
 namespace MaxCoRetailManager.Application.Profiles;
@@ -15,6 +16,7 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductDeleteDto>().ReverseMap();
         CreateMap<Product, ProductGetDto>().ReverseMap();
         CreateMap<Product, ProductUpdateDto>().ReverseMap();
+        CreateMap<Pagination<Product>, Pagination<ProductGetDto>>().ReverseMap();
         //#endregion
 
         CreateMap<User, UserCreateDto>()

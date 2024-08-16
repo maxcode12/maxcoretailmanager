@@ -1,4 +1,5 @@
 ﻿using MaxCoRetailManager.Application.Contracts.Persistence;
+using MaxCoRetailManager.Application.Specs;
 using MaxCoRetailManager.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,10 +34,8 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().ToListAsync();
     }
 
-    public async Task<T> GetAsync(int id)
-    {
-        return await _context.Set<T>().FindAsync(id);
-    }
+    public async Task<T> GetAsync(int id) => await _context.Set<T>().FindAsync(id);
+    public async Task<T> GetAsync(string id) => await _context.Set<T>().FindAsync(id);
 
     public async Task<IReadOnlyList<T>> GetAllPaginationAsync(int pageIndex, int pageSize,
         int count, IReadOnlyList<T> entity)
@@ -54,5 +53,14 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<Pagination<T>> GetAllPagination(CatalogSpecParams catalogSpecParams)
+    {
+        var query = _context.Set<T>().AsQueryable();
+        var count = query.Count();
+        var data = await query.Skip(catalogSpecParams.PageSize * (catalogSpecParams.PageIndex - 1)).ToListAsync();
+        return new Pagination<T>(catalogSpecParams.PageIndex, catalogSpecParams.PageSize, count, data);
+
     }
 }

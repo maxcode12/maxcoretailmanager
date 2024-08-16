@@ -5,5 +5,5 @@ namespace MaxCoRetailManager.Application.Features.Products.Commands;
 
 public class ProductDeleteCommandRequest : IRequest<Unit>
 {
-    public ProductDeleteDto ProductDeleteDto { get; set; }
+    public ProductDeleteDto ProductDeleteDto { get; set; } = new();
 }

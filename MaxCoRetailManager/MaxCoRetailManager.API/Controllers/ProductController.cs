@@ -1,5 +1,7 @@
 ﻿using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MaxCoRetailManager.Application.Features.Products.Commands;
+using MaxCoRetailManager.Application.Features.Products.Queries;
+using MaxCoRetailManager.Application.Specs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -70,5 +72,29 @@ public class ProductController : ControllerBase
             _logger.LogError(ex, "An error occurred while deleting the product");
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet]
+    [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var response = await _mediator.Send(new GetProductRequestById { Id = id });
+        return Ok(response);
+    }
+
+    [HttpGet("allProducts")]
+    [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
+    public async Task<IActionResult> GetAll()
+    {
+        var response = await _mediator.Send(new GetProductsListRequest());
+        return Ok(response);
+    }
+
+    [HttpGet("allProductsPagination")]
+    [ProducesResponseType(typeof(Pagination<ProductGetDto>), 200)]
+    public async Task<IActionResult> GetAllPagination([FromQuery] CatalogSpecParams productSpecParams)
+    {
+        var response = await _mediator.Send(new GetProductByPaginationRequest { CatalogSpecParams = productSpecParams });
+        return Ok(response);
     }
 }
