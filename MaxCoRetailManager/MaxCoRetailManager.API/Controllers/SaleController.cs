@@ -23,7 +23,7 @@ public class SaleController : ControllerBase
     [HttpGet]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAllSales()
     {
         try
         {
@@ -92,12 +92,12 @@ public class SaleController : ControllerBase
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
-    public async Task<IActionResult> Post([FromBody] SaleCreateDto saleCreateDto)
+    public async Task<IActionResult> CreateSale([FromBody] SaleCreateDto saleCreateDto)
     {
         try
         {
             var response = await _mediator.Send(new CreateSaleCommand { SaleCreateDto = saleCreateDto });
-            return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
+            return Ok(response);
         }
         catch (Exception ex)
         {
@@ -106,11 +106,11 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPut]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
-    public async Task<IActionResult> Put([FromBody] SaleUpdateDto saleUpdateDto)
+    public async Task<IActionResult> UpdateSale([FromBody] SaleUpdateDto saleUpdateDto)
     {
         try
         {

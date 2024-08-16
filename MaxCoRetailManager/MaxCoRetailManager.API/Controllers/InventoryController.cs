@@ -23,7 +23,7 @@ public class InventoryController : ControllerBase
     [HttpGet]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAllInventory()
     {
         try
         {
@@ -40,7 +40,7 @@ public class InventoryController : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Get(int id)
+    public async Task<IActionResult> GetInventoryById(int id)
     {
         try
         {
@@ -57,7 +57,7 @@ public class InventoryController : ControllerBase
     [HttpGet("Pagination")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Get([FromQuery] CatalogSpecParams query)
+    public async Task<IActionResult> GetInventoryByPagination([FromQuery] CatalogSpecParams query)
     {
         try
         {
@@ -74,7 +74,7 @@ public class InventoryController : ControllerBase
     [HttpPost]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Post([FromBody] CreateInventoryCommand command)
+    public async Task<IActionResult> CreateInventory([FromBody] CreateInventoryCommand command)
     {
         try
         {
@@ -91,7 +91,7 @@ public class InventoryController : ControllerBase
     [HttpPut]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public async Task<IActionResult> Put([FromBody] UpdateInventoryCommand command)
+    public async Task<IActionResult> UpdateInventory([FromBody] UpdateInventoryCommand command)
     {
         try
         {

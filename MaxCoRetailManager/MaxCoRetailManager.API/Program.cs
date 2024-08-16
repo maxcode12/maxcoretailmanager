@@ -19,6 +19,11 @@ builder.Services.AddIdentityRegisterService(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigurePersistenceService(builder.Configuration);
 
+// Register ILogger
+builder.Services.AddLogging();
+
+//Register the CORS service
+
 
 builder.Services.AddCors(options =>
 {

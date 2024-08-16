@@ -3,7 +3,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Categories.Requests.Commands;
 
-public class CategoryUpdateCommand : IRequest<Unit>
+public class CategoryUpdateCommand : IRequest<CategoryUpdateDto>
 {
-    public CategoryUpdateDto CategoryCreateDto { get; set; } = new();
+    public CategoryUpdateDto CategoryUpdateDto { get; set; } = new();
 }

@@ -30,7 +30,7 @@ namespace MaxCoRetailManager.API.Controllers
 
         public async Task<IActionResult> UpdateCategory([FromBody] CategoryUpdateDto categoryUpdateDto)
         {
-            var updateCategoryCommand = new CategoryUpdateCommand { CategoryCreateDto = categoryUpdateDto };
+            var updateCategoryCommand = new CategoryUpdateCommand { CategoryUpdateDto = categoryUpdateDto };
             var response = await _mediator.Send(updateCategoryCommand);
             return Ok(response);
         }
