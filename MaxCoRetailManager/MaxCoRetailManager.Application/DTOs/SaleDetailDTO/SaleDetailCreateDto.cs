@@ -10,6 +10,6 @@ public class SaleDetailCreateDto
     public decimal PurchasePrice { get; set; }
     public decimal Tax { get; set; }
     public DateTime SaleDate { get; set; }
-    public Sale Sale { get; set; }
-    public Product Product { get; set; }
+    public Sale Sale { get; set; } = new();
+    public Product Product { get; set; } = new();
 }

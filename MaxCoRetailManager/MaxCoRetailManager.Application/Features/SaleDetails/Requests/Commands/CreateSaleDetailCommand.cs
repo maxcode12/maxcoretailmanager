@@ -3,7 +3,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.SaleDetails.Requests.Commands;
 
-public class SaleDetailCommand : IRequest<SaleDetailCreateDto>
+public class CreateSaleDetailCommand : IRequest<SaleDetailCreateDto>
 {
     public SaleDetailCreateDto SaleDetailCreateDto { get; set; } = new();
 }

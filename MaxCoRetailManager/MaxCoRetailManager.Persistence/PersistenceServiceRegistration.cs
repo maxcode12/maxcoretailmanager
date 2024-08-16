@@ -1,6 +1,7 @@
 ﻿using MaxCoRetailManager.Application.Contracts.Persistence;
 using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
+using MaxCoRetailManager.Application.Contracts.Persistence.Sales;
 using MaxCoRetailManager.Core.Entities;
 using MaxCoRetailManager.Persistence.Data;
 using MaxCoRetailManager.Persistence.Repos;
@@ -19,8 +20,13 @@ public static class PersistenceServiceRegistration
             options.UseSqlServer(configuration.GetConnectionString("ProductConnection")));
 
         services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
+        services.AddScoped<IGenericRepository<Category>, GenericRepository<Category>>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IInventoryRepository, InventoryRepository>();
+        services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();
+        services.AddScoped<ISaleRepository, SaleRepository>();
+
 
         return services;
     }

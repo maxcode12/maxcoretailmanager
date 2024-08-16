@@ -6,7 +6,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Sales.Handlers;
 
-internal class GetSaleByDateHandler : IRequestHandler<GetSaleByDateQuery, SaleGetDto>
+internal class GetSaleByDateHandler : IRequestHandler<GetSalesByDateQuery, SaleGetDto>
 {
     private readonly ISaleRepository _saleRepository;
     private readonly IMapper _mapper;
@@ -17,7 +17,7 @@ internal class GetSaleByDateHandler : IRequestHandler<GetSaleByDateQuery, SaleGe
         _saleRepository = saleRepository;
 
     }
-    public async Task<SaleGetDto> Handle(GetSaleByDateQuery request, CancellationToken cancellationToken)
+    public async Task<SaleGetDto> Handle(GetSalesByDateQuery request, CancellationToken cancellationToken)
     {
         var sale = await _saleRepository.GetAsync(request.Date);
         var saleMapper = _mapper.Map<SaleGetDto>(sale);

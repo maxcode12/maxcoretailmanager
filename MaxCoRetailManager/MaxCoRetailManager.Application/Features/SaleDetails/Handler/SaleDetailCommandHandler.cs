@@ -7,7 +7,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.SaleDetails.Handler;
 
-public class SaleDetailCommandHandler : IRequestHandler<SaleDetailCommand, SaleDetailCreateDto>
+public class SaleDetailCommandHandler : IRequestHandler<CreateSaleDetailCommand, SaleDetailCreateDto>
 {
     private readonly IMapper _mapper;
     private readonly ISaleDetailRepository _saleDetailRepository;
@@ -17,7 +17,7 @@ public class SaleDetailCommandHandler : IRequestHandler<SaleDetailCommand, SaleD
         _mapper = mapper;
         _saleDetailRepository = saleDetailRepository;
     }
-    public async Task<SaleDetailCreateDto> Handle(SaleDetailCommand request, CancellationToken cancellationToken)
+    public async Task<SaleDetailCreateDto> Handle(CreateSaleDetailCommand request, CancellationToken cancellationToken)
     {
 
         var saleDetail = _mapper.Map<SaleDetail>(request.SaleDetailCreateDto);

@@ -1,0 +1,107 @@
+﻿using MaxCoRetailManager.Application.Features.Inventories.Requests.Commands;
+using MaxCoRetailManager.Application.Features.Inventories.Requests.Queries;
+using MaxCoRetailManager.Application.Specs;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace MaxCoRetailManager.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class InventoryController : ControllerBase
+{
+    private readonly IMediator _mediator;
+    private readonly ILogger<InventoryController> _logger;
+
+    public InventoryController(IMediator mediator, ILogger<InventoryController> logger)
+    {
+        _mediator = mediator;
+        _logger = logger;
+
+    }
+
+    [HttpGet]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Get()
+    {
+        try
+        {
+            var response = await _mediator.Send(new GetInventoryListQuery());
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching the inventory");
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("{id}")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Get(int id)
+    {
+        try
+        {
+            var response = await _mediator.Send(new GetInventoryByIdQuery { Id = id });
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching the inventory");
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("Pagination")]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Get([FromQuery] CatalogSpecParams query)
+    {
+        try
+        {
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while fetching the inventory");
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Post([FromBody] CreateInventoryCommand command)
+    {
+        try
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while creating the inventory");
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPut]
+    [ProducesResponseType(200)]
+    [ProducesResponseType(400)]
+    public async Task<IActionResult> Put([FromBody] UpdateInventoryCommand command)
+    {
+        try
+        {
+            var response = await _mediator.Send(command);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while updating the inventory");
+            return BadRequest(ex.Message);
+        }
+    }
+}

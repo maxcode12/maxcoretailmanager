@@ -4,7 +4,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Sales.Requests.Queries;
 
-public class GetSalePaginationQuery : IRequest<Pagination<SaleGetDto>>
+public class GetSalesPaginationQuery : IRequest<Pagination<SaleGetDto>>
 {
     public CatalogSpecParams CatalogSpecParams { get; set; } = new();
 }

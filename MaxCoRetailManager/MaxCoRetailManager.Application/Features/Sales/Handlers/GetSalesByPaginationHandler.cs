@@ -7,7 +7,7 @@ using MediatR;
 
 namespace MaxCoRetailManager.Application.Features.Sales.Handlers;
 
-public class GetSalesByPaginationHandler : IRequestHandler<GetSalePaginationQuery, Pagination<SaleGetDto>>
+public class GetSalesByPaginationHandler : IRequestHandler<GetSalesPaginationQuery, Pagination<SaleGetDto>>
 {
     private readonly ISaleRepository _saleRepository;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class GetSalesByPaginationHandler : IRequestHandler<GetSalePaginationQuer
         _mapper = mapper;
     }
 
-    public async Task<Pagination<SaleGetDto>> Handle(GetSalePaginationQuery request, CancellationToken cancellationToken)
+    public async Task<Pagination<SaleGetDto>> Handle(GetSalesPaginationQuery request, CancellationToken cancellationToken)
     {
 
         var salePagination = await _saleRepository.GetAllPagination(request.CatalogSpecParams);
