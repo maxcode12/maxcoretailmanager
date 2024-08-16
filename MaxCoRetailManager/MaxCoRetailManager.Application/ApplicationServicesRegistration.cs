@@ -1,6 +1,7 @@
-﻿using FluentValidation.AspNetCore;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+
 namespace MaxCoRetailManager.Application;
 
 public static class ApplicationServicesRegistration
@@ -18,8 +19,8 @@ public static class ApplicationServicesRegistration
 
         });
 
-        services.AddFluentValidationAutoValidation();
 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 
 

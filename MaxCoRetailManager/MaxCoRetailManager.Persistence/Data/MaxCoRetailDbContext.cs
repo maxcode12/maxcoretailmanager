@@ -44,7 +44,7 @@ public class MaxCoRetailDbContext : DbContext
             entity.Property(e => e.SaleDate).HasColumnType("datetime");
             entity.HasMany(e => e.SaleDetails)
             .WithOne(e => e.Sale)
-            .HasForeignKey(e => e.SaleId);
+            .HasForeignKey(e => e.SaleId).OnDelete(DeleteBehavior.Restrict);
         });
 
         modelBuilder.Entity<SaleDetail>(SaleDetail =>
@@ -57,16 +57,8 @@ public class MaxCoRetailDbContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(50);
-            entity.HasOne(e => e.ParentCategory)
-            .WithMany(c => c.Children)
-            .HasForeignKey(e => e.ParentId);
-
-            entity.HasMany(e => e.Products)
-            .WithOne(e => e.Category)
-            .HasForeignKey(e => e.CategoryId)
-            .OnDelete(DeleteBehavior.Restrict);
+            entity.Property(e => e.Description).HasMaxLength(200);
         });
 
         base.OnModelCreating(modelBuilder);
