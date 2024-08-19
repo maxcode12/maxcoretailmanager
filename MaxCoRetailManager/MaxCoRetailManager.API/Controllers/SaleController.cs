@@ -20,7 +20,7 @@ public class SaleController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet("GetAllSales")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> GetAllSales()
@@ -37,7 +37,7 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("GetSaleById")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> Get(int id)
@@ -54,7 +54,7 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpGet("SearchByDate")]
+    [HttpGet("GetSaleByDate")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> SearchByDate(DateTime date)
@@ -71,7 +71,7 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpGet("Pagination")]
+    [HttpGet("GetSaleByPagination")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> GetSalePagination([FromQuery] CatalogSpecParams catalogSpecParams)
@@ -88,7 +88,7 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpPost]
+    [HttpPost("CreateSale")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
@@ -106,7 +106,7 @@ public class SaleController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPut("UpdateSale")]
     [ProducesResponseType(201)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]

@@ -16,7 +16,7 @@ namespace MaxCoRetailManager.API.Controllers
             _send = send;
         }
 
-        [HttpGet("UserList")]
+        [HttpGet("GetAllUsers")]
         [ProducesResponseType(typeof(IReadOnlyList<UserGetDto>), 200)]
         [ProducesResponseType(204)]
         public async Task<IActionResult> Get()

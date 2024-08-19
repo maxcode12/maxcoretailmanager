@@ -27,10 +27,12 @@ builder.Services.AddLogging();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyCorsPolicy",
+    options.AddPolicy("AllowAllOrigins",
         builder =>
         {
-            builder.AllowAnyOrigin()
+            builder
+            .WithOrigins("http://localhost:4200/")
+            .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         });
@@ -48,9 +50,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAllOrigins");
 
 app.UseAuthorization();
 
+
 app.MapControllers();
+
 
 app.Run();

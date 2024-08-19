@@ -20,7 +20,7 @@ public class ProductController : ControllerBase
         _logger = logger;
     }
 
-    [HttpPost]
+    [HttpPost("CreateProduct")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
@@ -38,7 +38,7 @@ public class ProductController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPut("UpdateProduct")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
@@ -56,7 +56,7 @@ public class ProductController : ControllerBase
         }
     }
 
-    [HttpDelete]
+    [HttpDelete("DeleteProduct")]
     [ProducesResponseType(204)]
     [ProducesResponseType(400)]
     [ProducesResponseType(typeof(List<string>), 422)]
@@ -74,7 +74,7 @@ public class ProductController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpGet("GetProductById")]
     [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
     public async Task<IActionResult> GetById(int id)
     {
@@ -82,7 +82,7 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("allProducts")]
+    [HttpGet("GetAllProducts")]
     [ProducesResponseType(typeof(List<ProductGetDto>), 200)]
     public async Task<IActionResult> GetAll()
     {
@@ -90,7 +90,7 @@ public class ProductController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("allProductsPagination")]
+    [HttpGet("GetProductByPagination")]
     [ProducesResponseType(typeof(Pagination<ProductGetDto>), 200)]
     public async Task<IActionResult> GetAllPagination([FromQuery] CatalogSpecParams productSpecParams)
     {

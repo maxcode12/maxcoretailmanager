@@ -17,7 +17,7 @@ namespace MaxCoRetailManager.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("CreateCategory")]
 
         public async Task<IActionResult> CreateCategory([FromBody] CategoryCreateDto categoryCreateDto)
         {
@@ -26,7 +26,7 @@ namespace MaxCoRetailManager.API.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateCategory")]
 
         public async Task<IActionResult> UpdateCategory([FromBody] CategoryUpdateDto categoryUpdateDto)
         {
@@ -35,7 +35,7 @@ namespace MaxCoRetailManager.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet]
+        [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetCategories()
         {
             var getCategoriesQuery = new GetCategorysListQuery();
@@ -43,7 +43,7 @@ namespace MaxCoRetailManager.API.Controllers
             return Ok(response);
         }
 
-        [HttpGet("Id")]
+        [HttpGet("GetCategoryById")]
         public async Task<IActionResult> GetCategoryById(int Id)
         {
             var getCategoryByIdQuery = new GetCategoryByIdQuery() { Id = Id };

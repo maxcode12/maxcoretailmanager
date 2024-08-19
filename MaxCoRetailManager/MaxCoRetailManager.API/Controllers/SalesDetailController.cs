@@ -20,7 +20,7 @@ namespace MaxCoRetailManager.API.Controllers
         }
 
 
-        [HttpGet("DetailSales")]
+        [HttpGet("GetAllDetailSales")]
         public async Task<ActionResult<IReadOnlyList<SaleDetail>>> GetAllSales(CancellationToken ct)
         {
             var query = new GetSaleDetailsListQuery();
@@ -29,7 +29,7 @@ namespace MaxCoRetailManager.API.Controllers
 
         }
 
-        [HttpGet("DetailSales/{id}")]
+        [HttpGet("GetDetailSalesById")]
         public async Task<ActionResult<SaleDetail>> GetSaleById(int id, CancellationToken ct)
         {
             var query = new GetSaleDetailsByIdQuery { Id = id };
@@ -37,14 +37,14 @@ namespace MaxCoRetailManager.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Pagination")]
+        [HttpGet("GetDetailSaleByPagination")]
         public async Task<ActionResult<Pagination<SaleDetail>>> GetSalesPagination([FromQuery] GetSalesDetailsPaginationQuery query, CancellationToken ct)
         {
             var result = await _mediator.Send(query, ct);
             return Ok(result);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("CreateSaleDetail")]
         public async Task<ActionResult<SaleDetail>> CreateSale(SaleDetailCreateDto saleDetail, CancellationToken ct)
         {
             var command = new CreateSaleDetailCommand { SaleDetailCreateDto = saleDetail };
