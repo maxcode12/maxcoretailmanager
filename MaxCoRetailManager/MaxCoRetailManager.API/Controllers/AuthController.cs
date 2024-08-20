@@ -32,6 +32,10 @@ public class AuthController : ControllerBase
         return Ok(await _send.Send(query));
     }
 
-
+    [HttpGet("GetCurrentUser")]
+    public async Task<IActionResult> GetCurrentUser()
+    {
+        return Ok(await _send.Send(new GetCurrentUserRequest()));
+    }
 
 }

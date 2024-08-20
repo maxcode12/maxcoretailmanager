@@ -40,7 +40,7 @@ public static class AssemblyIdentityRegisterService
         services.AddScoped<SignInManager<User>, SignInManager<User>>();
         services.AddScoped<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+        services.AddHttpContextAccessor();
         services.AddAuthentication(
             options =>
             {
@@ -62,7 +62,7 @@ public static class AssemblyIdentityRegisterService
                     (Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]))
                 };
             });
-
+        services.AddAuthorization();
 
 
         return services;
