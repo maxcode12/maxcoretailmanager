@@ -1,8 +1,8 @@
-﻿using MaxCoRetailManager.Core.Common;
+﻿using MaxCoRetailManager.Application.DTOs.Common;
 
 namespace MaxCoRetailManager.Application.DTOs.SaleDTO;
 
-public class SaleCreateDto : Base
+public class SaleCreateDto : BaseDto
 {
     public int ProductId { get; set; }
     public int Quantity { get; set; }

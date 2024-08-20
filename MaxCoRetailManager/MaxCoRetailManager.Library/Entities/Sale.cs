@@ -12,9 +12,9 @@ public class Sale : Base
     public string CashierId { get; set; } = string.Empty;
     public DateTime SaleDate { get; set; } = DateTime.UtcNow;
 
-    public Product Product { get; set; }
-    public User Cashier { get; set; }
-    public ICollection<SaleDetail> SaleDetails { get; set; }
+    public Product Product { get; set; } = new();
+    public User Cashier { get; set; } = new();
+    public ICollection<SaleDetail> SaleDetails { get; set; } = new List<SaleDetail>();
 
 
 }

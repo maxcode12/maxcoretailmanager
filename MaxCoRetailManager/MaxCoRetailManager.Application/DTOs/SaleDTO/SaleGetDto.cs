@@ -1,8 +1,10 @@
-﻿namespace MaxCoRetailManager.Application.DTOs.SaleDTO;
+﻿using MaxCoRetailManager.Application.DTOs.Common;
 
-public class SaleGetDto
+namespace MaxCoRetailManager.Application.DTOs.SaleDTO;
+
+public class SaleGetDto : BaseDto
 {
-    public int Id { get; set; }
+
     public int ProductId { get; set; }
     public int Quantity { get; set; }
     public decimal TotalPrice { get; set; }
