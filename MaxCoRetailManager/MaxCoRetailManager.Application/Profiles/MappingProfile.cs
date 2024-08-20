@@ -19,6 +19,8 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductDeleteDto>().ReverseMap();
         CreateMap<Product, ProductGetDto>().ReverseMap();
         CreateMap<Product, ProductUpdateDto>().ReverseMap();
+        //CreateMap<ProductCreateDto, Product>().ReverseMap();
+        //CreateMap<ProductCreateDto, Inventory>().ReverseMap();
         CreateMap<Pagination<Product>, Pagination<ProductGetDto>>().ReverseMap();
         #endregion
 

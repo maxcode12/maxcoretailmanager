@@ -68,5 +68,8 @@ public class MaxCoRetailDbContext : DbContext
     public DbSet<Product> Products { get; set; }
     public DbSet<Sale> Sales { get; set; }
     public DbSet<SaleDetail> SaleDetails { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<Customer> Customers { get; set; }
 
 }

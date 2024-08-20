@@ -19,7 +19,6 @@ public class ProductUpdateDto : BaseDto
     public string ImageUrl { get; set; } = string.Empty;
     public bool IsAvailable { get; set; }
     public bool IsOnSale { get; set; }
-
     public int CategoryId { get; set; }
     public string UserId { get; set; } = string.Empty;
 

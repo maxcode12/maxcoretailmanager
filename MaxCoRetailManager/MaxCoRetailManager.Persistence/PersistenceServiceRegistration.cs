@@ -17,7 +17,7 @@ public static class PersistenceServiceRegistration
         (this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<MaxCoRetailDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("ProductConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("SecondaryConnection")));
 
         services.AddScoped<IGenericRepository<Product>, GenericRepository<Product>>();
         services.AddScoped<IGenericRepository<Category>, GenericRepository<Category>>();
@@ -26,6 +26,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IInventoryRepository, InventoryRepository>();
         services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();
         services.AddScoped<ISaleRepository, SaleRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
         return services;

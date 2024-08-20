@@ -1,8 +1,10 @@
 ﻿using MaxCoRetailManager.Application.Contracts.Identity;
+using MaxCoRetailManager.Application.DTOs.UserDTO;
 using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
 using MaxCoRetailManager.Application.Responses;
 using MaxCoRetailManager.Application.Settings;
 using MaxCoRetailManager.Core.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +16,7 @@ namespace MaxCoRetailManager.Identity.Repos;
 
 public class AuthRepository : IAuthRepository
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly UserManager<User> _userManager;
     private readonly IOptions<JwtSettings> _jwtSettings;
     private readonly SignInManager<User> _signInManager;
@@ -21,13 +24,47 @@ public class AuthRepository : IAuthRepository
     public AuthRepository(
         SignInManager<User> signInManager,
         UserManager<User> userManager,
-        IOptions<JwtSettings> jwtSettings)
+        IOptions<JwtSettings> jwtSettings,
+        IHttpContextAccessor httpContextAccessor
+        )
     {
         _signInManager = signInManager;
         _userManager = userManager;
         _jwtSettings = jwtSettings;
+        _httpContextAccessor = httpContextAccessor;
 
     }
+
+    public Guid? GetCurrentUserId()
+    {
+        Guid? userId = null;
+        if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            var claimsIdentity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            userId = new Guid(claimsIdentity.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
+        }
+        return userId;
+    }
+
+    public UserProfileDto GetUserProfile()
+    {
+        UserProfileDto userProfile = new UserProfileDto();
+        if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+        {
+            var claimsIdentity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
+            userProfile.Email = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Email).Value;
+            userProfile.UserName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Name).Value;
+            userProfile.UserId = new(claimsIdentity.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
+            userProfile.FirstName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.GivenName).Value;
+            userProfile.LastName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Surname).Value;
+            userProfile.PhoneNumber = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.MobilePhone).Value;
+            userProfile.PhotoUrl = claimsIdentity.FindFirst(x => x.Type == "PhotoUrl").Value;
+            userProfile.RoleName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Role).Value;
+
+        }
+        return userProfile;
+    }
+
     public async Task<AuthResponse> Login(GetUserRequest request)
     {
         var response = new AuthResponse();

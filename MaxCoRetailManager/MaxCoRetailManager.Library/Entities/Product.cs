@@ -14,10 +14,10 @@ public class Product : Base
     [Required]
     [StringLength(256)]
     public string Sku { get; set; } = string.Empty;
-
     public decimal Price { get; set; }
+
+    [StringLength(10)]
     public string DeliveryTimeSpan { get; set; } = string.Empty;
-    public int Quantity { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
     public bool IsAvailable { get; set; }
     public bool IsOnSale { get; set; }
