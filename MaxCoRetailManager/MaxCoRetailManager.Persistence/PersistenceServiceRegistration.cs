@@ -23,8 +23,8 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IGenericRepository<Category>, GenericRepository<Category>>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IInventoryRepository, InventoryRepository>();
         services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();
+        services.AddScoped<IInventoryRepository, InventoryRepository>();
         services.AddScoped<ISaleRepository, SaleRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 

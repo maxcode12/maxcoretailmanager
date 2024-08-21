@@ -28,7 +28,8 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new ProductCommand { ProductCreateDto = productCreateDto });
+            var response = await _mediator.Send(new ProductCommand(productCreateDto));
+
             return Ok(response);
         }
         catch (Exception ex)

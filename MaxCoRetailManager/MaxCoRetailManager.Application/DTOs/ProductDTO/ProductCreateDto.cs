@@ -21,5 +21,6 @@ public class ProductCreateDto
 
     public int CategoryId { get; set; }
     public string UserId { get; set; } = string.Empty;
+    public int LocationId { get; set; }
 
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.DTOs.CategoryDTO;
 using MaxCoRetailManager.Application.DTOs.InventoryDTO;
+using MaxCoRetailManager.Application.DTOs.LocationDTO;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MaxCoRetailManager.Application.DTOs.SaleDetailDTO;
 using MaxCoRetailManager.Application.DTOs.SaleDTO;
@@ -19,11 +20,14 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductDeleteDto>().ReverseMap();
         CreateMap<Product, ProductGetDto>().ReverseMap();
         CreateMap<Product, ProductUpdateDto>().ReverseMap();
-        //CreateMap<ProductCreateDto, Product>().ReverseMap();
-        //CreateMap<ProductCreateDto, Inventory>().ReverseMap();
         CreateMap<Pagination<Product>, Pagination<ProductGetDto>>().ReverseMap();
         #endregion
-
+        #region Location Mapping
+        CreateMap<Location, LocationCreateDto>().ReverseMap();
+        CreateMap<Product, LocationDeleteDto>().ReverseMap();
+        CreateMap<Product, LocationGetDto>().ReverseMap();
+        CreateMap<Product, LocationUpdateDto>().ReverseMap();
+        #endregion
 
         #region Category Mapping
         CreateMap<Category, CategoryCreateDto>().ReverseMap();

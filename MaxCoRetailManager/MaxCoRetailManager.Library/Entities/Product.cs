@@ -28,6 +28,9 @@ public class Product : Base
     public string UserId { get; set; } = string.Empty;
 
     public User User { get; set; } = new();
+    public int LocationId { get; set; }
+
+    public Location Location { get; set; }
 
     public virtual ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 

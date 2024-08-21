@@ -21,5 +21,6 @@ public class ProductUpdateDto : BaseDto
     public bool IsOnSale { get; set; }
     public int CategoryId { get; set; }
     public string UserId { get; set; } = string.Empty;
+    public int LocationId { get; set; }
 
 }

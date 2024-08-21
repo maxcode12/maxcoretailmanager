@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaxCoRetailManager.Persistence.Migrations
 {
     [DbContext(typeof(MaxCoRetailDbContext))]
-    [Migration("20240820071352_ExtendedSchemaMigration")]
-    partial class ExtendedSchemaMigration
+    [Migration("20240821072449_LocationAddedToProductionMigration")]
+    partial class LocationAddedToProductionMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -148,6 +148,7 @@ namespace MaxCoRetailManager.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ProductId");
@@ -237,6 +238,9 @@ namespace MaxCoRetailManager.Persistence.Migrations
                     b.Property<bool>("IsOnSale")
                         .HasColumnType("bit");
 
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -260,6 +264,8 @@ namespace MaxCoRetailManager.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("UserId");
 
@@ -449,13 +455,17 @@ namespace MaxCoRetailManager.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MaxCoRetailManager.Core.Entities.User", null)
+                    b.HasOne("MaxCoRetailManager.Core.Entities.User", "User")
                         .WithMany("Inventories")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MaxCoRetailManager.Core.Entities.Location", b =>
@@ -485,6 +495,12 @@ namespace MaxCoRetailManager.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("MaxCoRetailManager.Core.Entities.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MaxCoRetailManager.Core.Entities.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
@@ -492,6 +508,8 @@ namespace MaxCoRetailManager.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Location");
 
                     b.Navigation("User");
                 });
