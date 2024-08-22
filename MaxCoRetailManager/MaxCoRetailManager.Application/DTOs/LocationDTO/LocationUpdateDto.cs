@@ -7,9 +7,8 @@ public class LocationUpdateDto : BaseDto
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public int ParentLocationId { get; set; } = 0;
-    public string UserId { get; set; } = string.Empty;
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+
 
 }
 

@@ -19,6 +19,9 @@ public class ProductUpdateDto : BaseDto
     public string ImageUrl { get; set; } = string.Empty;
     public bool IsAvailable { get; set; }
     public bool IsOnSale { get; set; }
+    public bool IsSellOnPOS { get; set; }
+
+    public bool IsSellOnline { get; set; }
     public int CategoryId { get; set; }
     public string UserId { get; set; } = string.Empty;
     public int LocationId { get; set; }

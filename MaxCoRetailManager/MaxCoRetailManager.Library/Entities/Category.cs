@@ -5,7 +5,7 @@ namespace MaxCoRetailManager.Core.Entities;
 
 public class Category : Base
 {
-    public int CategoryId { get; set; }
+
     [Required]
     [StringLength(100)]
     public string Name { get; set; } = string.Empty;
@@ -13,13 +13,22 @@ public class Category : Base
     [StringLength(200)]
     public string? Description { get; set; } = string.Empty;
 
-    public int ParentCategoryId { get; set; }
+    public string UserId { get; set; } = Guid.Empty.ToString();
 
-    public string UserId { get; set; } = string.Empty;
+    User User { get; set; }
+
+    //nullable parent category id to allow for a category to have no parent category
+    //Assuming a one to many relationship between parent and child categories
+
+    public int? ParentCategoryId { get; set; }
+
+    public Category? ParentCategory { get; set; }
+
 
     //navigation properties assume that a category can have many users
-    public virtual ICollection<User> User { get; set; } = new List<User>();
-
+    public virtual ICollection<Product> Products { get; set; }
+    public virtual ICollection<User> Users { get; set; }
+    public virtual ICollection<SaleDetail> SaleDetails { get; set; }
 
 
 }

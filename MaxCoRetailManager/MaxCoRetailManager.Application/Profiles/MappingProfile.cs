@@ -22,11 +22,12 @@ public class MappingProfile : Profile
         CreateMap<Product, ProductUpdateDto>().ReverseMap();
         CreateMap<Pagination<Product>, Pagination<ProductGetDto>>().ReverseMap();
         #endregion
+
         #region Location Mapping
         CreateMap<Location, LocationCreateDto>().ReverseMap();
-        CreateMap<Product, LocationDeleteDto>().ReverseMap();
-        CreateMap<Product, LocationGetDto>().ReverseMap();
-        CreateMap<Product, LocationUpdateDto>().ReverseMap();
+        CreateMap<Location, LocationDeleteDto>().ReverseMap();
+        CreateMap<Location, LocationGetDto>().ReverseMap();
+        CreateMap<Location, LocationUpdateDto>().ReverseMap();
         #endregion
 
         #region Category Mapping

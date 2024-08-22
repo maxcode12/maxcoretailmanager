@@ -1,13 +1,11 @@
-﻿using MaxCoRetailManager.Application.DTOs.Common;
+﻿namespace MaxCoRetailManager.Application.DTOs.LocationDTO;
 
-namespace MaxCoRetailManager.Application.DTOs.LocationDTO;
-
-public class LocationCreateDto : BaseDto
+public class LocationCreateDto
 {
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public int ParentLocationId { get; set; } = 0;
-    public string UserId { get; set; } = string.Empty;
+    public int? ParentLocationId { get; set; } = 0;
+
 
 }
 

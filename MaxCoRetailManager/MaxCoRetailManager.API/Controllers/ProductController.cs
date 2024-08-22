@@ -28,7 +28,8 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new ProductCommand(productCreateDto));
+            var createProductCommand = new ProductCommand { ModelProduct = productCreateDto };
+            var response = await _mediator.Send(createProductCommand);
 
             return Ok(response);
         }

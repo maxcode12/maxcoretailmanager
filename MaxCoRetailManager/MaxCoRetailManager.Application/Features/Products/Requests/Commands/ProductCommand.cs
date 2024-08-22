@@ -5,10 +5,6 @@ namespace MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 
 public class ProductCommand : IRequest<ProductCreateDto>
 {
-    public ProductCreateDto ModelProduct { get; set; } = new();
+    public ProductCreateDto ModelProduct { get; set; }
 
-    public ProductCommand(ProductCreateDto productCreateDto)
-    {
-        ModelProduct = ModelProduct;
-    }
 }

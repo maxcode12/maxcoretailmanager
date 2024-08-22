@@ -25,7 +25,9 @@ public class LocationController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new LocationQuery());
+            var getLocationQuery = new LocationQuery();
+
+            var response = await _mediator.Send(getLocationQuery);
             return Ok(response);
         }
         catch (Exception ex)
@@ -41,7 +43,8 @@ public class LocationController : ControllerBase
     {
         try
         {
-            var response = await _mediator.Send(new LocationCommand { ModelLocation = location });
+            var createLocationCommand = new LocationCommand() { ModelLocation = location };
+            var response = await _mediator.Send(createLocationCommand);
             return Ok(response);
         }
         catch (Exception ex)
