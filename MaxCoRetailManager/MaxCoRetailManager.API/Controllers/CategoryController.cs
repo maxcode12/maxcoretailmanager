@@ -2,12 +2,16 @@
 using MaxCoRetailManager.Application.Features.Categories.Requests.Commands;
 using MaxCoRetailManager.Application.Features.Categories.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaxCoRetailManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;

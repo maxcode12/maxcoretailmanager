@@ -23,7 +23,7 @@ namespace MaxCoRetailManager.Application.DTOs.ProductDTO
 
         public bool IsSellOnline { get; set; }
         public int CategoryId { get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public string UserId { get; set; } = Guid.NewGuid().ToString();
         public int LocationId { get; set; }
 
 

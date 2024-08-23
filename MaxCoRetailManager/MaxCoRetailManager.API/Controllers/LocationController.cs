@@ -2,12 +2,16 @@
 using MaxCoRetailManager.Application.Features.Locations.Requests.Commands;
 using MaxCoRetailManager.Application.Features.Locations.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaxCoRetailManager.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Produces("application/json")]
+[Consumes("application/json")]
+[Authorize]
 public class LocationController : ControllerBase
 {
     private readonly IMediator _mediator;

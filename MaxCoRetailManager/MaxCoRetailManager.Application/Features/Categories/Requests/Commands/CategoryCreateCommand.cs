@@ -5,5 +5,6 @@ namespace MaxCoRetailManager.Application.Features.Categories.Requests.Commands;
 
 public class CategoryCreateCommand : IRequest<CategoryCreateDto>
 {
-    public CategoryCreateDto CategoryCreateDto { get; set; } = new();
+    public CategoryCreateDto CategoryCreateDto { get; set; }
+
 }

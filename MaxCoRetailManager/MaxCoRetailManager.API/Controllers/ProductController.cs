@@ -3,12 +3,14 @@ using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 using MaxCoRetailManager.Application.Features.Products.Requests.Queries;
 using MaxCoRetailManager.Application.Specs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaxCoRetailManager.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class ProductController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -28,7 +30,7 @@ public class ProductController : ControllerBase
     {
         try
         {
-            var createProductCommand = new ProductCommand { ModelProduct = productCreateDto };
+            var createProductCommand = new ProductCommand(productCreateDto);
             var response = await _mediator.Send(createProductCommand);
 
             return Ok(response);

@@ -3,12 +3,16 @@ using MaxCoRetailManager.Application.Features.Sales.Requests.Commands;
 using MaxCoRetailManager.Application.Features.Sales.Requests.Queries;
 using MaxCoRetailManager.Application.Specs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaxCoRetailManager.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Produces("application/json")]
+[Consumes("application/json")]
+[Authorize]
 public class SaleController : ControllerBase
 {
     private readonly IMediator _mediator;

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Identity;
+using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.DTOs.CategoryDTO;
 using MaxCoRetailManager.Application.Features.Categories.Requests.Commands;
 using MaxCoRetailManager.Core.Entities;
@@ -9,33 +10,37 @@ namespace MaxCoRetailManager.Application.Features.Categories.Handlers;
 
 public class CategoryCreateCommandHandler : IRequestHandler<CategoryCreateCommand, CategoryCreateDto>
 {
-    private readonly Contracts.Persistence.IUnitOfWork _unitOfWork;
+
     private readonly IMapper _mapper;
     private readonly IAuthRepository _authenticate;
-    public CategoryCreateCommandHandler(Contracts.Persistence.IUnitOfWork unitOfWork, IMapper mapper,
+    private readonly ICategoryRepository _categoryRepository;
+    public CategoryCreateCommandHandler(IMapper mapper,
+        ICategoryRepository categoryRepository,
         IAuthRepository authRepository)
     {
-        _unitOfWork = unitOfWork;
+        _categoryRepository = categoryRepository;
+
         _mapper = mapper;
         _authenticate = authRepository;
     }
     public async Task<CategoryCreateDto> Handle(CategoryCreateCommand request, CancellationToken cancellationToken)
     {
-        var userId = _authenticate.GetCurrentUserId();
-        var categoryRepo = _unitOfWork.GetRepository<Category>();
-        if (userId == null)
+        var currentUser = _authenticate.GetCurrentUserId();
+        var userId = request.CategoryCreateDto.UserId = currentUser.ToString();
+
+        if (currentUser == null)
         {
             throw new Exception("Unauthorized access");
         }
 
         var category = new Category
         {
-            UserId = userId.ToString(),
+            UserId = userId,
             Name = request.CategoryCreateDto.Name,
             Description = request.CategoryCreateDto.Description
         };
+        await _categoryRepository.AddAsync(category);
 
-        await categoryRepo.AddAsync(category);
 
         return _mapper.Map<CategoryCreateDto>(category);
     }

@@ -15,11 +15,6 @@ public class User : IdentityUser
     public string LastName { get; set; } = string.Empty;
 
 
-    public virtual ICollection<Category> Categories { get; set; }
-    public virtual ICollection<Product> Products { get; set; }
-    public virtual ICollection<Sale> Sales { get; set; }
-    public virtual ICollection<Inventory> Inventories { get; set; }
-    public virtual ICollection<Location> Locations { get; set; }
 }
 
 

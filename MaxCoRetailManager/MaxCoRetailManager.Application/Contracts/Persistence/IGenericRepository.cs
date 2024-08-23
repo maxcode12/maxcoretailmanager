@@ -6,7 +6,7 @@ namespace MaxCoRetailManager.Application.Contracts.Persistence;
 
 public interface IGenericRepository<T> where T : class
 {
-    Task<T> GetAsync(object id);
+    Task<T> GetAsync(int id);
     Task<T> GetAsync(string id);
     Task<T> GetAsync(DateTime date);
     Task<IReadOnlyList<T>> GetAllAsync();

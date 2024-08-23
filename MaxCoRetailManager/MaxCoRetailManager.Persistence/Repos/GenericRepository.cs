@@ -38,7 +38,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().ToListAsync();
     }
 
-    public async Task<T> GetAsync(object id) => await _context.Set<T>().FindAsync(id);
+    public async Task<T> GetAsync(int id) => await _context.Set<T>().FindAsync(id);
     public async Task<T> GetAsync(string id) => await _context.Set<T>().FindAsync(id);
 
     public async Task<IReadOnlyList<T>> GetAllPaginationAsync(int pageIndex, int pageSize,

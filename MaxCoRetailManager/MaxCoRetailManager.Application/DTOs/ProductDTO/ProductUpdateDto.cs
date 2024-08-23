@@ -15,15 +15,15 @@ public class ProductUpdateDto : BaseDto
 
     public decimal Price { get; set; }
     public string DeliveryTimeSpan { get; set; } = string.Empty;
-    public int Quantity { get; set; }
     public string ImageUrl { get; set; } = string.Empty;
-    public bool IsAvailable { get; set; }
-    public bool IsOnSale { get; set; }
-    public bool IsSellOnPOS { get; set; }
-
-    public bool IsSellOnline { get; set; }
+    public bool? IsAvailable { get; set; }
+    public bool? IsOnSale { get; set; }
+    public bool? IsSellOnPOS { get; set; }
+    public int Quantity { get; set; }
+    public bool? IsSellOnline { get; set; }
+    public string UserId { get; set; } = Guid.NewGuid().ToString();
     public int CategoryId { get; set; }
-    public string UserId { get; set; } = string.Empty;
     public int LocationId { get; set; }
+
 
 }

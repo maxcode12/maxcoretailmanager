@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaxCoRetailManager.Identity.Migrations
 {
     [DbContext(typeof(MaxCoRetailIdentityDbContext))]
-    [Migration("20240815080132_CreatedNewMigrations")]
-    partial class CreatedNewMigrations
+    [Migration("20240823054849_NewIdentityMigration")]
+    partial class NewIdentityMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,6 +125,32 @@ namespace MaxCoRetailManager.Identity.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8b693986-0d12-487f-9fde-e0e983e2f51c",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "c619043f-2923-4180-95fc-1104ed3ddc3e",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "c619453f-2973-4180-78fc-1b84ed3dkc3o",
+                            Name = "Manager",
+                            NormalizedName = "MANAGER"
+                        },
+                        new
+                        {
+                            Id = "d6s9043f-3924-4589-05fq-1i94ed3ddc3f",
+                            Name = "Cashier",
+                            NormalizedName = "CASHIER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

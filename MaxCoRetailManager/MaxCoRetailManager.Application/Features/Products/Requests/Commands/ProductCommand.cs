@@ -7,4 +7,9 @@ public class ProductCommand : IRequest<ProductCreateDto>
 {
     public ProductCreateDto ModelProduct { get; set; }
 
+    public ProductCommand(ProductCreateDto modelProduct)
+    {
+        ModelProduct = modelProduct;
+    }
+
 }

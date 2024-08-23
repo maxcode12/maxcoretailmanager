@@ -18,6 +18,7 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<MaxCoRetailDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("SecondaryConnection")));
 
+
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ISaleDetailRepository, SaleDetailRepository>();

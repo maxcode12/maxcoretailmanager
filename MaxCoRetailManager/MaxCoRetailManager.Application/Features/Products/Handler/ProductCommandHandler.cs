@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using MaxCoRetailManager.Application.Contracts.Identity;
+using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
-using MaxCoRetailManager.Application.DTOs.InventoryDTO;
+using MaxCoRetailManager.Application.Contracts.Persistence.Sales;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
 using MaxCoRetailManager.Core.Entities;
@@ -12,70 +13,86 @@ namespace MaxCoRetailManager.Application.Features.Products.Handler;
 public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCreateDto>
 {
     private readonly IProductRepository _productRepository;
-    private readonly Contracts.Persistence.IUnitOfWork _unitOfWork;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly IAuthRepository _authenticate;
     private readonly IInventoryRepository _inventoryRepository;
     private readonly ILocationRepository _locationRepository;
+    private readonly ISaleRepository _saleRepository;
     private readonly IMapper _mapper;
 
-    public ProductCommandHandler(Contracts.Persistence.IUnitOfWork unitOfWork,
-        IAuthRepository authenticate, IMapper mapper,
-        IInventoryRepository inventoryRepository, ILocationRepository locationRepository)
+    public ProductCommandHandler(IProductRepository productRepository, // Add this to the constructor
+    ICategoryRepository categoryRepository,
+    IAuthRepository authenticate,
+    IMapper mapper,
+    IInventoryRepository inventoryRepository,
+    ILocationRepository locationRepository,
+    ISaleRepository saleRepository)
     {
-        _mapper = mapper;
-        _unitOfWork = unitOfWork;
-        _authenticate = authenticate;
-        _inventoryRepository = inventoryRepository;
-        _locationRepository = locationRepository;
+        _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+        _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
+        _authenticate = authenticate ?? throw new ArgumentNullException(nameof(authenticate));
+        _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+        _inventoryRepository = inventoryRepository ?? throw new ArgumentNullException(nameof(inventoryRepository));
+        _locationRepository = locationRepository ?? throw new ArgumentNullException(nameof(locationRepository));
+        _saleRepository = saleRepository ?? throw new ArgumentNullException(nameof(saleRepository));
     }
     public async Task<ProductCreateDto> Handle(ProductCommand request, CancellationToken cancellationToken)
     {
-        var updateInventory = new InventoryUpdateDto
-        {
-            UserId = request.ModelProduct.UserId,
-            Quantity = request.ModelProduct.Quantity
-        };
+        var currentUser = _authenticate.GetCurrentUserId();
+        var userId = request.ModelProduct.UserId = currentUser.ToString();
 
-        var userId = _authenticate.GetCurrentUserId();
-        var findLocation = await _locationRepository.GetAsync(request.ModelProduct.LocationId);
-        var findCategory = await _unitOfWork.GetRepository<Category>().GetAsync(request.ModelProduct.CategoryId);
-        var findProduct = await _productRepository.GetAsync(request.ModelProduct.Sku);
+        if (request.ModelProduct == null) throw new ArgumentNullException(nameof(request.ModelProduct));
 
-        var findSale = _unitOfWork.GetRepository<Sale>().GetAllAsync(s => s.UserId == userId.ToString());
 
-        var purchasePrice = request.ModelProduct.Price;
-        var productPrice = request.ModelProduct.Price;
+
+        var findLocation = await _locationRepository.GetAllAsync(u => u.UserId == userId);
+        var locationId = findLocation.FirstOrDefault(x => x.Id == request.ModelProduct.LocationId);
+        if (locationId == null) throw new Exception("Location not found");
+
+        var findCategory = await _categoryRepository.GetAllAsync(fc => fc.UserId == userId);
+        var categoryId = findCategory.FirstOrDefault(x => x.Id == request.ModelProduct.CategoryId);
+        if (categoryId == null) throw new Exception("Category not found");
+
 
         var product = new Product
         {
             Name = request.ModelProduct.Name,
             Description = request.ModelProduct.Description,
+            Price = request.ModelProduct.Price,
+            CategoryId = request.ModelProduct.CategoryId,
+            LocationId = request.ModelProduct.LocationId,
             Sku = request.ModelProduct.Sku,
-            Price = productPrice,
             DeliveryTimeSpan = request.ModelProduct.DeliveryTimeSpan,
             ImageUrl = request.ModelProduct.ImageUrl,
             IsAvailable = request.ModelProduct.IsAvailable,
             IsOnSale = request.ModelProduct.IsOnSale,
             IsSellOnPOS = request.ModelProduct.IsSellOnPOS,
             IsSellOnline = request.ModelProduct.IsSellOnline,
-            CategoryId = findCategory.Id,
             UserId = userId.ToString(),
-            LocationId = findLocation.Id,
-            Inventories = request.ModelProduct.Inventories.Select(
-                inv => new Inventory
-                {
-                    ProductId = findProduct.Id,
-                    Quantity = inv.Quantity,
-
-                }).ToList()
-
 
         };
 
-        var productMapped = _mapper.Map<ProductCreateDto>(product);
-
         await _productRepository.AddAsync(product);
 
+        var productMapped = _mapper.Map<ProductCreateDto>(product);
+
+        var findProduct = await _productRepository.GetAllAsync();
+
+        if (findProduct == null) throw new Exception("Product not found");
+
+
+
+        var inventory = new Inventory
+        {
+            ProductId = product.Id,
+            Quantity = request.ModelProduct.Quantity,
+            LocationId = request.ModelProduct.LocationId,
+            PurchaseDate = DateTime.Now,
+            PurchasePrice = request.ModelProduct.Price,
+            UserId = userId.ToString()
+        };
+
+        await _inventoryRepository.AddAsync(inventory);
 
 
         return productMapped;
