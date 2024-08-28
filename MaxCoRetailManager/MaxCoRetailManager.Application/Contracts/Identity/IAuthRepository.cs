@@ -12,4 +12,8 @@ public interface IAuthRepository
     public Guid? GetCurrentUserId();
     public UserProfileDto GetUserProfile();
 
+    Task<AuthResponse> GetUserByJwt(string jwt);
+
+    Task<AuthResponse> GetUserId(string userId);
+
 }

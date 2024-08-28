@@ -4,6 +4,7 @@ using MaxCoRetailManager.Identity.IdentityContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaxCoRetailManager.Identity.Migrations
 {
     [DbContext(typeof(MaxCoRetailIdentityDbContext))]
-    partial class MaxCoRetailIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240826203812_AddPermissionMigration")]
+    partial class AddPermissionMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,22 +83,18 @@ namespace MaxCoRetailManager.Identity.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PermissionId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Read")
                         .HasColumnType("bit");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Update")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PermissionId");
-
-                    b.HasIndex("RoleId");
 
                     b.ToTable("RolePermissions");
                 });
@@ -347,21 +346,6 @@ namespace MaxCoRetailManager.Identity.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("MaxCoRetailManager.Core.Entities.RolePermission", b =>
-                {
-                    b.HasOne("MaxCoRetailManager.Core.Entities.Permission", "Permission")
-                        .WithMany()
-                        .HasForeignKey("PermissionId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

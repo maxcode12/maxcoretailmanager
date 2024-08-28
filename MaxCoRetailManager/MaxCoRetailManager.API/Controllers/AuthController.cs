@@ -2,6 +2,7 @@
 using MaxCoRetailManager.Application.Features.Users.Requests.Commands;
 using MaxCoRetailManager.Application.Features.Users.Requests.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MaxCoRetailManager.API.Controllers;
@@ -11,12 +12,13 @@ namespace MaxCoRetailManager.API.Controllers;
 public class AuthController : ControllerBase
 {
     private ISender _send;
+    private IAuthRepository _authRepository;
 
     public AuthController(ISender send,
         IAuthRepository authRepository)
     {
         _send = send;
-
+        _authRepository = authRepository;
     }
 
     [HttpPost("register")]
@@ -38,4 +40,24 @@ public class AuthController : ControllerBase
         return Ok(await _send.Send(new GetCurrentUserRequest()));
     }
 
+    [Authorize]
+
+    [HttpPost("GetUserByJwt")]
+    public async Task<IActionResult> GetUserByJwt(string jwt)
+    {
+        var user = new GetUserByJwtQuery() { Jwt = jwt };
+        return Ok(await _send.Send(user));
+    }
+
+    [Authorize]
+
+    [HttpGet("GetUserProfile")]
+    public async Task<IActionResult> GetUserProfile()
+    {
+        var user = _authRepository.GetUserProfile();
+
+        return Ok(await _send.Send(user));
+    }
+
 }
+

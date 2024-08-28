@@ -21,7 +21,18 @@ public class CreateUserHandler : IRequestHandler<CreateUserCommand, BaseResponse
     public async Task<BaseResponse> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
         var response = new BaseResponse();
+        var userExist = await _authRepository.UserExists(request.UserCreateDto.UserName);
+        var userEmailExist = await _authRepository.UserExists(request.UserCreateDto.Email);
+
+        if (userExist != null && userEmailExist != null)
+        {
+            response.Message = "User exist already";
+            return response;
+
+        }
+
         var user = _mapper.Map<User>(request.UserCreateDto);
+
         await _authRepository.Register(user, request.UserCreateDto.Password);
         response.IsSuccess = true;
         response.Message = "User Created Successfully";

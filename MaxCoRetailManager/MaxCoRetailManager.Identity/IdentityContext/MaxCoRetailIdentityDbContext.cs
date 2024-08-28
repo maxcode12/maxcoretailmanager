@@ -21,5 +21,8 @@ public class MaxCoRetailIdentityDbContext : IdentityDbContext<User>
 
     public DbSet<User> Users { get; set; }
 
+    public DbSet<Permission> Permissions { get; set; }
+    public DbSet<RolePermission> RolePermissions { get; set; }
+
 
 }

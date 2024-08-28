@@ -20,13 +20,14 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
     private readonly ISaleRepository _saleRepository;
     private readonly IMapper _mapper;
 
-    public ProductCommandHandler(IProductRepository productRepository, // Add this to the constructor
-    ICategoryRepository categoryRepository,
-    IAuthRepository authenticate,
-    IMapper mapper,
-    IInventoryRepository inventoryRepository,
-    ILocationRepository locationRepository,
-    ISaleRepository saleRepository)
+    public ProductCommandHandler(
+        IProductRepository productRepository,
+        ICategoryRepository categoryRepository,
+        IAuthRepository authenticate,
+        IMapper mapper,
+        IInventoryRepository inventoryRepository,
+        ILocationRepository locationRepository,
+        ISaleRepository saleRepository)
     {
         _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
@@ -36,23 +37,36 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
         _locationRepository = locationRepository ?? throw new ArgumentNullException(nameof(locationRepository));
         _saleRepository = saleRepository ?? throw new ArgumentNullException(nameof(saleRepository));
     }
+
     public async Task<ProductCreateDto> Handle(ProductCommand request, CancellationToken cancellationToken)
     {
         var currentUser = _authenticate.GetCurrentUserId();
         var userId = request.ModelProduct.UserId = currentUser.ToString();
 
-        if (request.ModelProduct == null) throw new ArgumentNullException(nameof(request.ModelProduct));
-
-
+        if (request.ModelProduct == null)
+        {
+            throw new ArgumentNullException(nameof(request.ModelProduct));
+        }
 
         var findLocation = await _locationRepository.GetAllAsync(u => u.UserId == userId);
         var locationId = findLocation.FirstOrDefault(x => x.Id == request.ModelProduct.LocationId);
-        if (locationId == null) throw new Exception("Location not found");
+        if (locationId == null)
+        {
+            throw new Exception("Location not found");
+        }
 
         var findCategory = await _categoryRepository.GetAllAsync(fc => fc.UserId == userId);
         var categoryId = findCategory.FirstOrDefault(x => x.Id == request.ModelProduct.CategoryId);
-        if (categoryId == null) throw new Exception("Category not found");
+        if (categoryId == null)
+        {
+            throw new Exception("Category not found");
+        }
 
+        var findProductId = await _productRepository.GetAllAsync(p => p.Id == request.ModelProduct.Id);
+        if (findProductId != null)
+        {
+            throw new Exception("Product already exists");
+        }
 
         var product = new Product
         {
@@ -68,8 +82,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
             IsOnSale = request.ModelProduct.IsOnSale,
             IsSellOnPOS = request.ModelProduct.IsSellOnPOS,
             IsSellOnline = request.ModelProduct.IsSellOnline,
-            UserId = userId.ToString(),
-
+            UserId = userId.ToString()
         };
 
         await _productRepository.AddAsync(product);
@@ -77,10 +90,10 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
         var productMapped = _mapper.Map<ProductCreateDto>(product);
 
         var findProduct = await _productRepository.GetAllAsync();
-
-        if (findProduct == null) throw new Exception("Product not found");
-
-
+        if (findProduct == null)
+        {
+            throw new Exception("Product not found");
+        }
 
         var inventory = new Inventory
         {
@@ -94,8 +107,6 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
 
         await _inventoryRepository.AddAsync(inventory);
 
-
         return productMapped;
-
     }
 }

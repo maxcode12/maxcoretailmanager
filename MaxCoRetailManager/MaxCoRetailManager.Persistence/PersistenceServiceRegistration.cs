@@ -25,6 +25,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IInventoryRepository, InventoryRepository>();
         services.AddScoped<ISaleRepository, SaleRepository>();
         services.AddScoped<ILocationRepository, LocationRepository>();
+        services.AddScoped<IPaymentRepository, PaymentRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

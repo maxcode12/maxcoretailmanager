@@ -25,6 +25,8 @@ public static class AssemblyIdentityRegisterService
                b => b.MigrationsAssembly(typeof(AssemblyIdentityRegisterService).Assembly.FullName)),
                ServiceLifetime.Scoped);
 
+
+
         services.AddIdentity<User, IdentityRole>(
             op => op.SignIn.RequireConfirmedAccount = true)
                         .AddEntityFrameworkStores<MaxCoRetailIdentityDbContext>()
@@ -39,6 +41,7 @@ public static class AssemblyIdentityRegisterService
         services.AddScoped<UserManager<User>, UserManager<User>>();
         services.AddScoped<SignInManager<User>, SignInManager<User>>();
         services.AddScoped<RoleManager<IdentityRole>, RoleManager<IdentityRole>>();
+        //services.AddScoped<IRolePermissions, RolePermissions>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddHttpContextAccessor();
         services.AddAuthentication(
