@@ -54,7 +54,7 @@ public class AuthController : ControllerBase
     [HttpGet("GetUserProfile")]
     public async Task<IActionResult> GetUserProfile()
     {
-        var user = _authRepository.GetUserProfile();
+        var user = new GetUserProfileQuery();
 
         return Ok(await _send.Send(user));
     }

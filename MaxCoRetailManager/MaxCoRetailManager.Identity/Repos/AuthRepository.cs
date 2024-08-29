@@ -164,14 +164,52 @@ public class AuthRepository : IAuthRepository
         if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
         {
             var claimsIdentity = _httpContextAccessor.HttpContext.User.Identity as ClaimsIdentity;
-            userProfile.Email = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Email).Value;
-            userProfile.UserName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Name).Value;
-            userProfile.UserId = new(claimsIdentity.FindFirst(x => x.Type == ClaimTypes.NameIdentifier).Value);
-            userProfile.FirstName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.GivenName).Value;
-            userProfile.LastName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Surname).Value;
-            userProfile.PhoneNumber = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.MobilePhone).Value;
-            userProfile.PhotoUrl = claimsIdentity.FindFirst(x => x.Type == "PhotoUrl").Value;
-            userProfile.RoleName = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Role).Value;
+
+            if (claimsIdentity != null)
+            {
+                var userIdClaim = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.NameIdentifier);
+                if (userIdClaim != null)
+                {
+                    userProfile.UserId = userIdClaim.Value;
+                }
+
+                var roleClaim = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Role);
+                if (roleClaim != null)
+                {
+                    userProfile.RoleName = roleClaim.Value;
+                }
+                else
+                {
+                    userProfile.RoleName = claimsIdentity.RoleClaimType;
+                }
+
+                var photoClaim = claimsIdentity.FindFirst(x => x.Type == "Photo");
+                if (photoClaim != null)
+                {
+                    userProfile.PhotoUrl = photoClaim.Value;
+                }
+
+                userProfile.UserName = claimsIdentity.Name;
+
+                var firstNameClaim = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.GivenName);
+                if (firstNameClaim != null)
+                {
+                    userProfile.FirstName = firstNameClaim.Value;
+                }
+
+                var lastNameClaim = claimsIdentity.FindFirst(x => x.Type == ClaimTypes.Surname);
+                if (lastNameClaim != null)
+                {
+                    userProfile.LastName = lastNameClaim.Value;
+                }
+
+                var permissionClaim = claimsIdentity.FindFirst(x => x.Type == "Permission");
+                if (permissionClaim != null)
+                {
+                    userProfile.Permission = permissionClaim.Value;
+
+                }
+            }
         }
         return userProfile;
     }
@@ -258,6 +296,9 @@ public class AuthRepository : IAuthRepository
             new Claim(ClaimTypes.NameIdentifier, usernameExists.Result.Id),
             new Claim(ClaimTypes.Name, usernameExists.Result.UserName),
             new Claim(JwtRegisteredClaimNames.Sub, usernameExists.Result.UserName),
+            new Claim(ClaimTypes.Email, usernameExists.Result.Email),
+            new Claim(ClaimTypes.GivenName, usernameExists.Result.FirstName),
+            new Claim("PhotoUrl", usernameExists.Result.PhotoUrl),
             new Claim(ClaimTypes.Surname, usernameExists.Result.LastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         }.Union(userClaims).Union(roleClaims);

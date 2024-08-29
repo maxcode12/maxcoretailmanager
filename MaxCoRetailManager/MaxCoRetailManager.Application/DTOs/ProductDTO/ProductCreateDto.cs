@@ -1,9 +1,8 @@
-﻿using MaxCoRetailManager.Application.DTOs.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MaxCoRetailManager.Application.DTOs.ProductDTO;
 
-public class ProductCreateDto : BaseDto
+public class ProductCreateDto
 {
     [Required]
     public string Name { get; set; } = string.Empty;

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MaxCoRetailManager.Application.Contracts.Identity;
 using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.Contracts.Persistence.Products;
 using MaxCoRetailManager.Application.Contracts.Persistence.Sales;
 using MaxCoRetailManager.Application.DTOs.ProductDTO;
 using MaxCoRetailManager.Application.Features.Products.Requests.Commands;
+using MaxCoRetailManager.Application.Validators.Product;
 using MaxCoRetailManager.Core.Entities;
 using MediatR;
 
@@ -40,6 +42,15 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
 
     public async Task<ProductCreateDto> Handle(ProductCommand request, CancellationToken cancellationToken)
     {
+        var productValidation = new ProductCreateValidator(_authenticate, _productRepository, _categoryRepository, _locationRepository, _inventoryRepository);
+
+        var validationResult = await productValidation.ValidateAsync(request.ModelProduct, cancellationToken);
+
+        if (!validationResult.IsValid)
+        {
+            throw new ValidationException(validationResult.Errors);
+        }
+
         var currentUser = _authenticate.GetCurrentUserId();
         var userId = request.ModelProduct.UserId = currentUser.ToString();
 
@@ -62,8 +73,8 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
             throw new Exception("Category not found");
         }
 
-        var findProductId = await _productRepository.GetAllAsync(p => p.Id == request.ModelProduct.Id);
-        if (findProductId != null)
+        var findProductId = await _productRepository.GetAllAsync(p => p.UserId == userId);
+        if (findProductId == null)
         {
             throw new Exception("Product already exists");
         }
@@ -83,6 +94,7 @@ public class ProductCommandHandler : IRequestHandler<ProductCommand, ProductCrea
             IsSellOnPOS = request.ModelProduct.IsSellOnPOS,
             IsSellOnline = request.ModelProduct.IsSellOnline,
             UserId = userId.ToString()
+
         };
 
         await _productRepository.AddAsync(product);

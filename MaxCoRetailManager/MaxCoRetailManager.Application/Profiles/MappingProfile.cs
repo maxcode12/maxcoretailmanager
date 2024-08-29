@@ -62,5 +62,7 @@ public class MappingProfile : Profile
            opt => opt.Ignore())
            .ReverseMap();
         CreateMap<User, UserGetDto>().ReverseMap();
+
+        CreateMap<User, UserProfileDto>().ReverseMap();
     }
 }

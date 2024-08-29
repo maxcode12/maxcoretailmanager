@@ -1,12 +1,16 @@
 ﻿using FluentValidation;
+using MaxCoRetailManager.Application.Contracts.Persistence.Categories;
 using MaxCoRetailManager.Application.DTOs.CategoryDTO;
 
 namespace MaxCoRetailManager.Application.Validators.Category;
 
 public class CategoryCreateValidator : AbstractValidator<CategoryCreateDto>
 {
-    public CategoryCreateValidator()
+    private readonly ICategoryRepository _categoryReposity;
+    public CategoryCreateValidator(ICategoryRepository categoryRepository)
     {
+        _categoryReposity = categoryRepository;
+
         RuleFor(p => p.Name)
             .NotEmpty().WithMessage("Name is required.")
             .NotNull()
